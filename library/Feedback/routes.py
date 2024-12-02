@@ -25,6 +25,7 @@ def add_comment():
 
         # Flash a success message and redirect to the comment list page
         flash("Feedback comment added successfully!", "success")
+        
         return redirect(url_for("feedback.view_comment"))
 
     return render_template("add_comment.html")
