@@ -1,0 +1,50 @@
+
+<div class="container">
+    <h2>Comment List</h2>
+    <style>
+        body { font-family: 'Courier New', monospace; background-color: #ffe0b2; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        h2 { color: #333; text-align: center; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #8e44ad; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; }
+        button:hover { background-color: #6c3483; }
+    </style>
+
+    <!-- Filter and Sort Form -->
+    <form method="get" action="{{ url_for('feedback.view_comment') }}">
+        <input type="text" name="Comment Type" placeholder="Filter by Comment Type" value="">
+        <select name="sort">
+            <option value="asc" {% if sort_order == "asc" %}selected{% endif %}>Sort by Year (Ascending)</option>
+            <option value="desc" {% if sort_order == "desc" %}selected{% endif %}>Sort by Year (Descending)</option>
+        </select>
+        <button type="submit" class="btn btn-primary">Apply Filters</button>
+    </form>
+
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Comment Type</th>
+                <th>Comment Text</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comment in comments %}
+            <tr>
+                
+                    <!-- Edit Button -->
+                    <a href="{{ url_for('FeedbackComment.edit_comment', comment_id=comment.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    
+                    <!-- Delete Button as Form -->
+                    <form action="{{ url_for('feedback.delete_comment', comment_id=comment.id) }}" method="POST" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Home - Unique Design</title>
+    <style>
+        body { font-family: 'Courier New', monospace; background-color: #0b0514; margin: 0; padding: 20px; }
+        .jumbotron { max-width: 800px; margin: 0 auto; text-align: center; background:#ffe0b2; color: white; padding: 40px; border-radius: 8px; }
+        h1 { font-size: 2.5rem; }
+        a { display: inline-block; margin: 10px; padding: 15px 25px; border-radius: 5px; text-decoration: none; color: white; }
+        .btn-primary { background-color: #8e44ad; }
+        .btn-primary:hover { background-color: #550e35; }
+        .btn-info { background-color: #3498db; }
+        .btn-info:hover { background-color: #5695d4; }
+    </style>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>Welcome to the Feedback Comment Page</h1>
+        <a href="{{ url_for('feedback.add_comment') }}" class="btn-primary">Add a New Comment</a>
+        <a href="{{ url_for('feedback.view_comment') }}" class="btn-info">View Comment</a>
+    </div>
+</body>
+</html>

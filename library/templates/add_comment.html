@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Comment - Unique Style</title>
+    <style>
+        body { font-family: 'Courier New', monospace; background-color: #ffe0b2; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        h2 { color: #333; text-align: center; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #8e44ad; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; }
+        button:hover { background-color: #6c3483; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Add a New Comment</h2>
+        <form action="{{ url_for('Feedback.add_comment') }}" method="POST">
+            <label for="title">Comment Type</label>
+            <input type="text" id="Comment Type" name="Comment Type" required>
+
+            <label for="Comment Text">Comment Text</label>
+            <input type="text" id="Comment Text" name="Comment Text" required>
+
+            <label for="Date Text">Date Text</label>
+            <input type="text" id="Date Text" name="Date" required>
+
+
+
+            <button type="submit">Add Comment</button>
+        </form>
+    </div>
+</body>
+</html>

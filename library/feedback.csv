@@ -1,0 +1,15 @@
+﻿comment_id,Category,comment_name,date,type,forename,surname
+R01,Results,Assumptions have not been clearly stated.,22/10/2023,positive,John,Smith
+RO2,Results,There should be some tabular presentation of results,10/09/2023,positive,Jake,Wilson
+RO3,Results,Graphs or graphical presentation have/has not been used as expected.,07/07/2023,negative,Thomas,Brown
+RO4,Results,The analysis of the results is too trivial in nature and a more detailed analysis was necessary ,18/10/2023,positive,Joan,Miller
+RO5, Results,"Too much has been read into the results and sweeping conclusions have been made, which are not fully justified.",02/04/2023,negative,Ken,Jones
+RO6,Results,"Statistical analysis aspects are flawed, e.g. they are incorrect, incomplete or inappropriately applied",27/01/2023,negative,Simon,Davies
+RO7,Results,There is insufficient discussion of results and it has been wrongly assumed that they speak for themselves.,29/12/2023,positive,Anna,Jones
+RO8,Results,Anomalies are present in results which have not been properly discussed or commented upon.,10/09/2023,positive,Ben,Walker
+RO9,Results,Presentation of results involves excessive repetition and an appendix should have been used for the bulk of the material,11/03/2023,negative,Harvey,Taylor
+RO10,Results,"Irrelevant material has been included, which does not serve to enhance the presentation of results and/or related analysis.",09/06/2023,positive,Ian,Moore
+ST01,Structure,There is no title page or the included title page has errors or omissions.,11/05/2023,negative,Lucas,Jackson
+ST02,Structure,The overall structure has weaknesses e.g. No table of contents; no proper page numbering linked to the contents,12/08/2023,positive,John,Martin
+ST03,Structure,The structure has room for enhancement.,20/09/2023,positive,Thomas,Lee
+ST04,Structure,"Figures are not numbered in sequence and/or do not have captions; figures are not formally referred to at least once, in each case.",27/08/2023,negative,Daniel,White

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}Comment Page{% endblock %}</title>
+    <style>
+        body { font-family: 'Courier New', monospace; background-color: #ffe0b2; margin: 0; padding: 0; }
+        header { background-color: #333; color: white; padding: 10px 0; text-align: center; }
+        header nav a { color: white; margin: 0 15px; text-decoration: none; }
+        header nav a:hover { text-decoration: underline; }
+        main { padding: 20px; }
+        footer { background-color: #222; color: white; text-align: center; padding: 10px 0; position: fixed; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Comment Page</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/comment/add">Add Comment</a>
+            <a href="/comment/">View Comment</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}
+        <div class="content">
+            {% block page_content %}{% endblock %}
+        </div>
+        {% endblock %}
+    </main>
+    <footer>
+        &copy; {{ year }} Comment
+    </footer>
+</body>
+</html>
+

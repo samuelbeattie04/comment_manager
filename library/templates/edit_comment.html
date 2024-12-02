@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Edit Comment - Clean Style</title>
+    <style>
+        body { font-family: 'Courier New', monospace; background-color: #ffe0b2; margin: 0; padding: 0; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        h2 { color: #333; text-align: center; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
+        button { background-color: #8e44ad; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; }
+        button:hover { background-color: #6c3483; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Edit Comment</h2>
+        <form action="{{ url_for('feedback.edit_comment', comment_id=comment.id) }}" method="POST">
+            <label for="Comment Type">Comment Type</label>
+            <input type="text" id="title" name="Comment Type" value="" required>
+
+            <label for="Comment Text">Comment Text</label>
+            <input type="text" id="Comment Text" name="Comment Text" value="" required>
+
+            <label for="Date">Date</label>
+            <input type="number" id="Date" name="Date" value="" required>
+
+            <button type="submit">Update Comment</button>
+        </form>
+    </div>
+</body>
+</html>
