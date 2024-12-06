@@ -1,1 +1,1 @@
-from routes import feedback_blueprint
+from .routes import feedback_bp

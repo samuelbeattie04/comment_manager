@@ -1,6 +1,8 @@
-from flask import Flask
-from models import db
-from feedback import feedback_blueprint
+from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
+
+from .extensions import db
+from library.Feedback import feedback_bp
 
 
 app = Flask(__name__)
