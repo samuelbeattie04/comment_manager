@@ -8,6 +8,7 @@
         h2 { color: #333; text-align: center; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
         input { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
+        select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
         button { background-color: #8e44ad; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; }
         button:hover { background-color: #6c3483; }
     </style>
@@ -15,17 +16,30 @@
 <body>
     <div class="container">
         <h2>Add a New Comment</h2>
-        <form action="{{ url_for('Feedback.add_comment') }}" method="POST">
-            <label for="title">Comment Type</label>
-            <input type="text" id="Comment Type" name="Comment Type" required>
+        <form action="{{ url_for('feedback.add_comment') }}" method="POST">
+            <label for="Category">Category</label>
+            <select id="Category" name="category" required>
+                <option value="Results">Results</option>
+                <option value="Structure">Structure</option>
+            </select>
+
+            <label for="Type">Type</label>
+            <select id="Type" name="type" required>
+                <option value="positive">Positive</option>
+                <option value="negative">Negative</option>
+            </select>
 
             <label for="Comment Text">Comment Text</label>
-            <input type="text" id="Comment Text" name="Comment Text" required>
+            <input type="text" id="Comment Text" name="text" required>
 
-            <label for="Date Text">Date Text</label>
-            <input type="text" id="Date Text" name="Date" required>
+            <label for="Date">Date</label>
+            <input type="date" id="Date" name="date" required>
 
+            <label for="Forename">Forename</label>
+            <input type="text" id="Forename" name="forename" required>
 
+            <label for="Surname">Surname</label>
+            <input type="text" id="Surname" name="surname" required>
 
             <button type="submit">Add Comment</button>
         </form>

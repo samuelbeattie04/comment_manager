@@ -8,6 +8,7 @@ from library.Feedback import feedback_bp
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///feedback.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'secret_key'
 Bootstrap(app)  # Ensure Bootstrap is applied to the app
 db.init_app(app)
 

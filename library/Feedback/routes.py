@@ -1,6 +1,8 @@
+from datetime import datetime
+
 from flask import Blueprint, render_template, request, redirect, url_for, jsonify, flash
 from library.extensions import db
-from .models import FeedbackComment, Feedback
+from .models import Feedback
 from sqlalchemy.sql import func
 from collections import Counter
 
@@ -13,11 +15,21 @@ feedback_bp = Blueprint('feedback', __name__, template_folder='../templates')
 def add_comment():
     if request.method == "POST":
         comment_type = request.form.get("type")
-        comment_name = request.form.get("name")
+        text = request.form.get("text")
+        date = request.form.get("date")
+        forename = request.form.get("forename")
+        surname = request.form.get("surname")
+        category = request.form.get("category")
 
-        new_comment = FeedbackComment(
+        formatted_date = datetime.strptime(date, "%Y-%m-%d").date()
+
+        new_comment = Feedback(
             type=comment_type,
-            name=comment_name
+            text=text,
+            category=category,
+            date=formatted_date,
+            forename=forename,
+            surname=surname,
         )
 
         db.session.add(new_comment)
@@ -26,16 +38,17 @@ def add_comment():
         # Flash a success message and redirect to the comment list page
         flash("Feedback comment added successfully!", "success")
 
-        return redirect(url_for("feedback.view_data"))
+        return redirect(url_for("feedback.view_comment"))
 
     return render_template("add_comment.html")
 
 # GUI Query 2 view all feedback comments
-@feedback_bp.route('/view_data', methods=['GET'])
-def view_data():
+@feedback_bp.route('/view_comment', methods=['GET'])
+def view_comment():
     feedback_data = Feedback.query.all()
-    feedback_list = [{"comment_id": f.comment_id, "comment_name": f.comment_name, "date": f.date, "type": f.type, "forename": f.forename, "surname": f.surname} for f in feedback_data]
-    return jsonify(feedback_list), 200
+    comments = [{"id": f.id, "category": f.category, "text": f.text, "date": f.date, "type": f.type, "forename": f.forename, "surname": f.surname} for f in feedback_data]
+
+    return render_template("view_comment.html", comments=comments)
 
 # GUI Query 3 filter feedback comments
 @feedback_bp.route('/feedback', methods=['GET'])
@@ -58,7 +71,7 @@ def get_feedback_sorted():
     return jsonify([comment.to_dict() for comment in comments])
 
 # GUI Query 5 edit a feedback comment
-@feedback_bp.route("/edit/<int:comment_id>", methods=["GET", "POST"])
+@feedback_bp.route("/edit/<string:comment_id>", methods=["GET", "POST"])
 def edit_comment(comment_id):
     # Retrieve the feedback comment by ID
     comment = Feedback.query.get_or_404(comment_id)
@@ -75,8 +88,8 @@ def edit_comment(comment_id):
     return render_template("edit_comment.html", comment=comment)
 
 # GUI QUERY 6 delete a feedback comment
-@feedback_bp.route('/feedback/<int:comment_id>', methods=['DELETE'])
-def delete_feedback(comment_id):
+@feedback_bp.route('/feedback/<string:comment_id>', methods=['DELETE'])
+def delete_comment(comment_id):
     comment = Feedback.query.get(comment_id)
     db.session.delete(comment)
     db.session.commit()

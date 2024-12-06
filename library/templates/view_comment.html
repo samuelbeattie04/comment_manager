@@ -9,6 +9,7 @@
         input { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
         button { background-color: #8e44ad; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; }
         button:hover { background-color: #6c3483; }
+        table { width: 100% }
     </style>
 
     <!-- Filter and Sort Form -->
@@ -25,25 +26,26 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Comment Type</th>
-                <th>Comment Text</th>
+                <th>Type</th>
+                <th>Text</th>
                 <th>Date</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {% for comment in comments %}
-            <tr>
-                
-                    <!-- Edit Button -->
-                    <a href="{{ url_for('FeedbackComment.edit_comment', comment_id=comment.id) }}" class="btn btn-sm btn-warning">Edit</a>
-                    
-                    <!-- Delete Button as Form -->
-                    <form action="{{ url_for('feedback.delete_comment', comment_id=comment.id) }}" method="POST" style="display:inline;">
-                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
+        {% for comment in comments %}
+        <tr>
+            <td>{{ comment.type }}</td>
+            <td>{{ comment.text }}</td>
+            <td>{{ comment.date }}</td>
+            <td>
+                <a href="{{ url_for('feedback.edit_comment', comment_id=comment.id) }}" class="btn btn-sm btn-warning">Edit</a>
+                <form action="{{ url_for('feedback.delete_comment', comment_id=comment.id) }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
         </tbody>
     </table>
 </div>
