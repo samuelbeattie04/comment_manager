@@ -7,26 +7,41 @@
         .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
         h2 { color: #333; text-align: center; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
+        input, textarea, select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
         button { background-color: #8e44ad; color: white; border: none; padding: 10px 15px; cursor: pointer; border-radius: 4px; }
         button:hover { background-color: #6c3483; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Edit Comment</h2>
-        <form action="{{ url_for('feedback.edit_comment', comment_id=comment.id) }}" method="POST">
-            <label for="Comment Type">Comment Type</label>
-            <input type="text" id="Comment Type" name="Comment Type" value="" required>
+<div class="container">
+    <h2>Edit Comment</h2>
+    <form action="{{ url_for('feedback.edit_comment', comment_id=comment.id) }}" method="POST">
+        <label for="type">Comment Type</label>
+        <select id="type" name="type" required>
+            <option value="positive" {% if comment.type == "positive" %}selected{% endif %}>Positive</option>
+            <option value="negative" {% if comment.type == "negative" %}selected{% endif %}>Negative</option>
+        </select>
 
-            <label for="Comment Text">Comment Text</label>
-            <input type="text" id="Comment Text" name="Comment Text" value="" required>
+        <label for="text">Comment Text</label>
+        <textarea id="text" name="text" required>{{ comment.text }}</textarea>
 
-            <label for="Date">Date</label>
-            <input type="number" id="Date" name="Date" value="" required>
+        <label for="date">Date</label>
+        <input type="date" id="date" name="date" value="{{ comment.date }}" required>
 
-            <button type="submit">Update Comment</button>
-        </form>
-    </div>
+        <label for="forename">Forename</label>
+        <input type="text" id="forename" name="forename" value="{{ comment.forename }}" required>
+
+        <label for="surname">Surname</label>
+        <input type="text" id="surname" name="surname" value="{{ comment.surname }}" required>
+
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+            <option value="Results" {% if comment.category == "Results" %}selected{% endif %}>General</option>
+            <option value="Structure" {% if comment.category == "Structure" %}selected{% endif %}>Product</option>
+        </select>
+
+        <button type="submit">Update Comment</button>
+    </form>
+</div>
 </body>
 </html>

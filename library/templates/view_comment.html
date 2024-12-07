@@ -1,4 +1,3 @@
-
 <div class="container">
     <h2>Comment List</h2>
     <style>
@@ -14,7 +13,7 @@
 
     <!-- Filter and Sort Form -->
     <form method="get" action="{{ url_for('feedback.view_comment') }}">
-        <input type="text" name="Comment Type" placeholder="Filter by Comment Type" value="">
+        <input type="text" name="Comment Type" placeholder="Filter by Comment Type" value="{{ comment_type }}">
         <select name="sort">
             <option value="asc" {% if sort_order == "asc" %}selected{% endif %}>Sort by Year (Ascending)</option>
             <option value="desc" {% if sort_order == "desc" %}selected{% endif %}>Sort by Year (Descending)</option>
@@ -22,19 +21,20 @@
         <button type="submit" class="btn btn-primary">Apply Filters</button>
     </form>
 
-    
     <table class="table table-striped">
         <thead>
-            <tr>
-                <th>Type</th>
-                <th>Text</th>
-                <th>Date</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+            <th>Category</th>
+            <th>Type</th>
+            <th>Text</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for comment in comments %}
         <tr>
+            <td>{{ comment.category }}</td>
             <td>{{ comment.type }}</td>
             <td>{{ comment.text }}</td>
             <td>{{ comment.date }}</td>
@@ -49,4 +49,3 @@
         </tbody>
     </table>
 </div>
-
