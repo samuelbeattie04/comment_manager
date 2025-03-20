@@ -1,37 +1,33 @@
-#Coursework 1 Guidlines
-#pip install beautifulsoup4
-#pip install requests
-#pip install re
-
-#task1
 import requests
 from bs4 import BeautifulSoup
+from pathlib import Path
 
-# URL from which pdfs to be downloaded
-base_url = ""
-page_url = ""
-# Requests URL and get response object
+# URL of the webpage containing PDF links (replace with actual URL)
+base_url = "https://example.com"
+page_url = "index.html"
+
+# Request the webpage
 response = requests.get(f"{base_url}/{page_url}")
-# Verify the url and status code
-print(response.url)
-print(response.status_code)
+if response.status_code != 200:
+    print(f"Failed to retrieve page. Status: {response.status_code}")
+    exit(1)
 
-# Parse text obtained
+# Parse the HTML
 soup = BeautifulSoup(response.text, 'html.parser')
-links = soup.find_all('a')
-                      
-pdf_alink_result = []
-for link in pdf_links:
-    if ('.pdf' in link.get('href')):
-        pdf_alink_result.append(link['href'])
-print(pdf_alink_result)
 
-i = 0
-for each in pdf_alink_result:
-    i+=1
-    # Get response object for link
-    response = requests.get(f"{base_url}/{each}")
-    # Write content in pdf file
-    with open('task1_pdf_link.txt', 'w') as file:
-        for pdf_link in pdf_links:
-            file.write(pdf_link + '\n')
+# Extract PDF links
+pdf_links = []
+for link in soup.find_all('a', href=True):
+    href = link['href']
+    if href.endswith(".pdf"):
+        pdf_links.append(f"{base_url}/{href}")
+
+# Save links to a file
+output_file = Path("task1/task1_pdf_link.txt")
+output_file.parent.mkdir(exist_ok=True)  # Ensure the folder exists
+
+with output_file.open("w") as file:
+    for link in pdf_links:
+        file.write(link + '\n')
+
+print(f"Saved {len(pdf_links)} PDF links to {output_file}")
